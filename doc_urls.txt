@@ -1,4 +1,5 @@
-https://docs.celerdata.com/BYOC/docs/security/cloud_access_control/use_ssox
+https://danroscigno.github.io/Recipes/dogfood
+https://docs.celerdata.com/BYOC/docs/security/cloud_access_control/use_ssox/foo
 https://docs.celerdata.com/
 https://docs.celerdata.com/BYOC/docs/sql-reference/azure/create_managed_identity
 https://docs.celerdata.com/BYOC/docs/sql-reference/aws/create_vpc
