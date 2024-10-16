@@ -18,3 +18,10 @@ This
 ```bash
 rm x.csv log && scrapy crawl quotes -o x.csv >log  2>&1
 ```
+
+This gives a list of non-200 results or meta-refresh redirects (we use meta refresh to the landing page for 404's):
+
+```bash
+grep -e "DEBUG: Crawled" -e "DEBUG: Redirecting" log| grep -v "(200)"
+```
+
