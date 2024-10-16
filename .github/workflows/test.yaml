@@ -1,0 +1,46 @@
+
+name: Link check
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+    link-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+     
+      - name: Set up Python 3.10
+       uses: actions/setup-python@v3
+       with:
+         python-version: "3.10"
+
+      - name: Install Python Virtual ENV
+        run: pip3 install virtualenv
+
+      - name: Activate Virtual ENV
+        run: python -m venv venv && source venv/bin/activate && pip3 install -r requirements.txt
+
+      - name: Create a temp dir
+        run: |
+          mkdir ${{ runner.temp }}/link_check
+      
+      - name: Extract links from BYOC source
+        run: |
+            cp doc_urls.txt ${{ runner.temp }}/link_check/links.txt
+
+      - name: Test failure
+        run: |
+            echo "https://docs.starrocks.io/docs/introduction/foo/" >> ${{ runner.temp }}/link_check/links.txt
+
+      - name: Check links
+        run: |
+            scrapy crawl quotes > ${{ runner.temp }}/link_check/scrapy_log.txt 2>&1
+
+      - name: Check for errors
+        run: |
+            grep -e "DEBUG: Crawled" \
+                 -e "DEBUG: Redirecting" \
+                 ${{ runner.temp }}/link_check/scrapy_log.txt \
+                 | grep -v "(200)"
+
