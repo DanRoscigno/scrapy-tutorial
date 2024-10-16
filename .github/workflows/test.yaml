@@ -35,6 +35,7 @@ jobs:
 
       - name: Check links
         run: |
+            ls -R
             scrapy crawl quotes > ${{ runner.temp }}/link_check/scrapy_log.txt 2>&1
 
       - name: Check for errors
