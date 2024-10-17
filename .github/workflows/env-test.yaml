@@ -27,21 +27,21 @@ jobs:
         if: "${{ github.event.inputs.build_env == 'prod' }}"
         run: |
           echo "action_state=yellow" >> "$GITHUB_ENV"
-          echo "$DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
-          echo "$DOCUSAURUS_URL=https://docs.celerdata.com/" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_APPID=YMZPCY7XBN" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_SEARCH_KEY=59eb21636ecf1a3c93bfe0072526c659" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_INDEX=celerdataBYOC" >> "$GITHUB_ENV"
+          echo "DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
+          echo "DOCUSAURUS_URL=https://docs.celerdata.com/" >> "$GITHUB_ENV"
+          echo "ALGOLIA_APPID=YMZPCY7XBN" >> "$GITHUB_ENV"
+          echo "ALGOLIA_SEARCH_KEY=59eb21636ecf1a3c93bfe0072526c659" >> "$GITHUB_ENV"
+          echo "ALGOLIA_INDEX=celerdataBYOC" >> "$GITHUB_ENV"
 
       - name: Set the env for SANDBOX
         if: "${{ github.event.inputs.build_env == 'sandbox' }}"
         run: |
           echo "action_state=yellow" >> "$GITHUB_ENV"
-          echo "$DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
-          echo "$DOCUSAURUS_URL=https://docs-sandbox.celerdata.com/" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_APPID=WR1QU4CYKE" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_SEARCH_KEY=83bf26ca88ddce9f0438d0e94db4e44a" >> "$GITHUB_ENV"
-          echo "$ALGOLIA_INDEX=docs-sandbox-celerdata-BYOC" >> "$GITHUB_ENV"
+          echo "DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
+          echo "DOCUSAURUS_URL=https://docs-sandbox.celerdata.com/" >> "$GITHUB_ENV"
+          echo "ALGOLIA_APPID=WR1QU4CYKE" >> "$GITHUB_ENV"
+          echo "ALGOLIA_SEARCH_KEY=83bf26ca88ddce9f0438d0e94db4e44a" >> "$GITHUB_ENV"
+          echo "ALGOLIA_INDEX=docs-sandbox-celerdata-BYOC" >> "$GITHUB_ENV"
 
       - name: Display the env
         run: |
