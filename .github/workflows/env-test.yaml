@@ -1,0 +1,54 @@
+name: Deploy Docs
+run-name: Deploy Docs ${{ inputs.build_env }}
+on:
+  workflow_dispatch:
+    inputs:
+
+      build_env:
+        type: choice
+        description: Choose the env
+        options:
+          - sandbox
+          - prod
+
+# These are common env settings
+env:
+  DOC_BUILD_TYPE: stage
+  ES_WRITE_USER: ${{ secrets.ES_WRITE_USER }}
+  ES_WRITE_PASSWORD: ${{ secrets.ES_WRITE_PASSWORD }}
+  DOCS_GITHUB_USER: ${{ secrets.DOCS_GITHUB_USER }}
+  DOCS_GITHUB_TOKEN: ${{ secrets.DOCS_GITHUB_TOKEN }}
+jobs:
+  doc-service:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Set the env for PROD
+        if: "${{ github.event.inputs.build_env == 'prod' }}"
+        run: |
+          echo "action_state=yellow" >> "$GITHUB_ENV"
+          echo "$DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
+          echo "$DOCUSAURUS_URL=https://docs.celerdata.com/" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_APPID=YMZPCY7XBN" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_SEARCH_KEY=59eb21636ecf1a3c93bfe0072526c659" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_INDEX=celerdataBYOC" >> "$GITHUB_ENV"
+
+      - name: Set the env for SANDBOX
+        if: "${{ github.event.inputs.build_env == 'sandbox' }}"
+        run: |
+          echo "action_state=yellow" >> "$GITHUB_ENV"
+          echo "$DISABLE_VERSIONING=true" >> "$GITHUB_ENV"
+          echo "$DOCUSAURUS_URL=https://docs-sandbox.celerdata.com/" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_APPID=WR1QU4CYKE" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_SEARCH_KEY=83bf26ca88ddce9f0438d0e94db4e44a" >> "$GITHUB_ENV"
+          echo "$ALGOLIA_INDEX=docs-sandbox-celerdata-BYOC" >> "$GITHUB_ENV"
+
+      - name: Display the env
+        run: |
+          printf '%s\n' "$action_state" # This will output 'yellow'
+          printf '%s\n' "$DISABLE_VERSIONING"
+          printf '%s\n' "$DOCUSAURUS_URL"
+          printf '%s\n' "$ALGOLIA_APPID"
+          printf '%s\n' "$ALGOLIA_SEARCH_KEY"
+          printf '%s\n' "$ALGOLIA_INDEX"
+
