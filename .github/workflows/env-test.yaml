@@ -14,10 +14,10 @@ on:
 # These are common env settings
 env:
   DOC_BUILD_TYPE: stage
-  ES_WRITE_USER: ${{ secrets.ES_WRITE_USER }}
-  ES_WRITE_PASSWORD: ${{ secrets.ES_WRITE_PASSWORD }}
-  DOCS_GITHUB_USER: ${{ secrets.DOCS_GITHUB_USER }}
-  DOCS_GITHUB_TOKEN: ${{ secrets.DOCS_GITHUB_TOKEN }}
+  ES_WRITE_USER: D
+  ES_WRITE_PASSWORD: C
+  DOCS_GITHUB_USER: B
+  DOCS_GITHUB_TOKEN: A
 jobs:
   doc-service:
     runs-on: ubuntu-latest
